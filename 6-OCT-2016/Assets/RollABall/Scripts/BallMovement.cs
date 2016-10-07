@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BallMovement : MonoBehaviour {
-
+public class BallMovement : MonoBehaviour 
+{
 	private Vector3 startPosition;
 	private Rigidbody rbody;
 	public float moveForce;
@@ -14,8 +14,8 @@ public class BallMovement : MonoBehaviour {
 	}
 
 	void Update () {
-		float x = -Input.acceleration.y;
-		float y = Input.acceleration.x;
+		float x = Input.acceleration.y;
+		float y = -Input.acceleration.x;
 		rbody.AddForce(new Vector3 (x, 0, y) * moveForce);
 	}
 
