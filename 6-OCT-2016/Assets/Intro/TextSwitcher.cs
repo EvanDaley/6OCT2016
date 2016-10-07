@@ -7,6 +7,12 @@ public class TextSwitcher : MonoBehaviour {
 	public Canvas Canvas;
 	public GameObject TextPrefab;
 	public PlainText[] plainTextList;
+	private float timeOfLoad; // the time in game seconds that this level loaded up at
+
+	void Start()
+	{
+		timeOfLoad = Time.time;
+	}
 
 	void Update () 
 	{
@@ -15,13 +21,13 @@ public class TextSwitcher : MonoBehaviour {
 		{
 			if (plainTextList [i] .show == true)
 			{
-				if (Time.time > plainTextList[i].startTime)
+				if (Time.time > (plainTextList[i].startTime + timeOfLoad))
 				{
 					GameObject textInstance = GameObject.Instantiate (TextPrefab, Vector3.zero, transform.rotation) as GameObject;
 					textInstance.transform.SetParent (Canvas.transform, false);
 
 					DieAfterTime deathTimer = textInstance.GetComponent<DieAfterTime> ();
-					deathTimer.SetDeathTime (plainTextList[i].endTime);
+					deathTimer.SetDeathTime (plainTextList[i].endTime + timeOfLoad);
 
 					Text UIText = textInstance.GetComponent<Text> ();
 					UIText.text = plainTextList[i].text;

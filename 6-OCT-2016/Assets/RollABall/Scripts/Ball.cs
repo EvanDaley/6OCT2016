@@ -3,13 +3,29 @@ using System.Collections;
 
 public class Ball : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	private Vector3 startPos;
+	private Rigidbody rbody;
+	public float moveForce;
+
+	void Start () 
+	{
+		startPos = transform.position;
+		rbody = GetComponent<Rigidbody> ();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void Update () 
+	{
+		float x = Input.acceleration.x;
+		float y = Input.acceleration.y;
+
+		rbody.AddForce (new Vector3 (x, 0, y) * moveForce);
+	}
+
+	void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.layer == 9)
+		{
+			gameObject.transform.position = startPos;
+		}
 	}
 }

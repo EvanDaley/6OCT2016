@@ -21,7 +21,7 @@ public class LoadNextLevel : MonoBehaviour {
 		}
 	}
 
-	void LoadNext()
+	public void LoadNext()
 	{
 		if (hasPressed == false)
 		{
